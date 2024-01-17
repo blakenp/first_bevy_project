@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 #[derive(Resource, Debug, Default)]
 pub struct SceneAssets {
-    pub player_texture_atlas_sprite: Handle<Scene>,
+    pub player_image_handle: Handle<Image>, // Store a Handle<Image>
 }
 
 pub struct AssetLoaderPlugin;
@@ -15,7 +15,6 @@ impl Plugin for AssetLoaderPlugin {
 }
 
 fn load_assets(mut scene_assets: ResMut<SceneAssets>, asset_server: Res<AssetServer>) {
-    *scene_assets = SceneAssets {
-        player_texture_atlas_sprite: asset_server.load("spritesheet_players.png"),
-    }
+    let image_handle = asset_server.load("spritesheets/spritesheet_players.png");
+    scene_assets.player_image_handle = image_handle; // Now holds a Handle<Image>
 }
